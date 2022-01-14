@@ -14,7 +14,7 @@
   </head>
   <body>
     <h3>Order form</h3>
-    <form action="proses_tambah_kelas.php" method="post">
+    <form action="proses_order_form.php" method="post">
       <label for="jenis">Jenis</label>
       <select name="jenis" id="jenis" class="form-control">
         <option value="kiloan">Kiloan (Rp2.300/Kg)</option>
@@ -38,7 +38,7 @@
       var jenis = document.getElementById("jenis");
       var berat = document.getElementById("berat");
 
-      berat.addEventListener("keyup", (ev) => {
+      berat.addEventListener("keydown", (ev) => {
         switch (jenis.value) {
           case "kiloan":
             harga.innerHTML = formatter.format(2300 * berat.value);

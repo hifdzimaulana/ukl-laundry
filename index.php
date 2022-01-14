@@ -11,7 +11,7 @@
 
 <body>
     <div id="login" style="margin-top: 10%;">
-        <h1 align='center' style='margin-bottom:20;'>King Wash Laundry</h1>
+        <h1 align='center' style='margin-bottom:20;'>Wash King Laundry</h1>
         <form method="POST" action="proses_login.php" style="margin-top: 40px;">
             <table cellpadding="10" cellspacing="10" style="margin: 0 auto;">
                 <tr>
@@ -25,7 +25,9 @@
                     <td><input type="password" name="password" value="" class="form-control" /></td>
                 </tr>
                 <tr>
-                    <td colspan="3" align="right"><input type="submit" value="Masuk" class="btn btn-primary" /></td>
+                    <td colspan="1" align="left"><a href="register_form.php">Registrasi</a></td>
+                    <td></td>
+                    <td colspan="1" align="right"><input type="submit" value="Masuk" class="btn btn-primary" /></td>
                 </tr>
             </table>
         </form>

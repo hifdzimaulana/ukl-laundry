@@ -1,10 +1,5 @@
 <?php
-$username = "root";
-$password = "";
-$host = "localhost";
-$database = "laundry";
-
-$conn = mysqli_connect($host, $username, $password, $database);
-if (mysqli_errno($conn)) {
-    echo (mysqli_error($conn));
+$conn = mysqli_connect("localhost", "root", "", "laundry");
+if (mysqli_connect_errno()) {
+    printf("An error occured: %s", mysqli_connect_error());
 }

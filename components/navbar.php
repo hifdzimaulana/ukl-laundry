@@ -17,7 +17,7 @@
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?= $_SESSION['username'] ?></a>
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu pull-right" style="right: 0; left: auto;">
           <li><a class="dropdown-item" href="#">Action</a></li>
           <li><a class="dropdown-item" href="#">Another action</a></li>
           <li><a class="dropdown-item" href="#">Something else here</a></li>

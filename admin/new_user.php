@@ -47,11 +47,11 @@ if ($_SESSION['login_status'] == false) {
             <div class="row" style="margin-top: 15px;">
                 <div class="col">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="owner" id="owner" value="true">
+                        <input class="form-check-input" type="radio" name="role" id="owner" value="owner">
                         <label class="form-check-label" for="inlineRadio1">Owner</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="kasir" id="kasir" value="true">
+                        <input class="form-check-input" type="radio" name="role" id="kasir" value="kasir">
                         <label class="form-check-label" for="inlineRadio2">Kasir</label>
                     </div>
                 </div>

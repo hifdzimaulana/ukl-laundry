@@ -34,17 +34,17 @@ if ($_SESSION['login_status'] == false) {
             <?php
             include "../koneksi.php";
 
-            $qry_siswa = mysqli_query($conn, "select * from user");
+            $qry_users = mysqli_query($conn, "select * from user");
 
             $no = 0;
-            while ($data_siswa = mysqli_fetch_array($qry_siswa)) {
+            while ($user_data = mysqli_fetch_array($qry_users)) {
                 $no++; ?>
                 <tr>
-                    <td><?= $data_siswa['id'] ?></td>
-                    <td><?= $data_siswa['nama'] ?></td>
-                    <td><?= $data_siswa['username'] ?></td>
-                    <td><?= $data_siswa['role'] ?></td>
-                    <td><a href="ubah_siswa.php?id_siswa=<?= $data_siswa['id'] ?>" class="btn btn-success">Ubah</a> | <a href="hapus.php?id_siswa=<?= $data_siswa['id'] ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger">Hapus</a></td>
+                    <td><?= $no ?></td>
+                    <td><?= $user_data['nama'] ?></td>
+                    <td><?= $user_data['username'] ?></td>
+                    <td><?= $user_data['role'] ?></td>
+                    <td><a href="edit_user.php?id=<?= $user_data['id'] ?>" class="btn btn-success">Ubah</a> | <a href="delete_user.php?id=<?= $user_data['id'] ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger">Hapus</a></td>
 
                 </tr>
             <?php

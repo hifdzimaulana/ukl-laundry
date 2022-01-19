@@ -5,8 +5,7 @@ if (isset($_POST)) {
     $password = $_POST['password'];
     $role = null;
 
-    if ($_POST['role'] == 'owner') $role = 'owner';
-    else $role = 'kasir';
+    $_POST['role'] == 'owner' ? $role = 'owner' : $role = 'kasir';
 
     if (empty($fullname) or empty($username) or empty($password) or empty($role)) {
         echo "<script>alert('Form wajib terisi penuh!'); location.href = 'new_user.php';</script>";

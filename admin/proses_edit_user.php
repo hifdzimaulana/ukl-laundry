@@ -26,7 +26,7 @@ if ($_SESSION['login_status'] == true and $_SESSION['role'] == 'admin') {
     $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
     if ($result) {
-        header('location: users_list.php');
+        header('location: list_user.php');
     } else {
         echo sprintf("<script>alert('Error: %s'); location.href='edit_user.php?id=%s';</script>", mysqli_error($conn), $id);
     }

@@ -1,7 +1,9 @@
 <?php
 session_start();
-if ($_SESSION['login_status'] == false) {
-    header('location: login.php');
+if ($_SESSION['role'] == 'owner' or $_SESSION['login_status'] == false) {
+    header('location: ../admin/home.php');
+} else {
+    include '../koneksi.php';
 }
 ?>
 
@@ -12,29 +14,30 @@ if ($_SESSION['login_status'] == false) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users list</title>
+    <title>Laundry | List member</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
 </head>
 
 <body>
     <?php include "../components/navbar.php" ?>
 
-    <h3>Users list</h3>
+    <h3>List user</h3>
     <table class="table table-hover table-striped">
         <thead>
             <tr>
                 <th>id</th>
-                <th>nama</th>
-                <th>username</th>
-                <th>role</th>
-                <th>AKSI</th>
+                <th>Nama</th>
+                <th>Alamat</th>
+                <th>Jenis kelamin</th>
+                <th>Telepon</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <?php
             include "../koneksi.php";
 
-            $qry_users = mysqli_query($conn, "select * from user");
+            $qry_users = mysqli_query($conn, "select * from member");
 
             $no = 0;
             while ($user_data = mysqli_fetch_array($qry_users)) {
@@ -42,9 +45,10 @@ if ($_SESSION['login_status'] == false) {
                 <tr>
                     <td><?= $no ?></td>
                     <td><?= $user_data['nama'] ?></td>
-                    <td><?= $user_data['username'] ?></td>
-                    <td><?= $user_data['role'] ?></td>
-                    <td><a href="edit_user.php?id=<?= $user_data['id'] ?>" class="btn btn-success">Ubah</a> | <a href="delete_user.php?id=<?= $user_data['id'] ?>" onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger">Hapus</a></td>
+                    <td><?= $user_data['alamat'] ?></td>
+                    <td><?= $user_data['jenis_kelamin'] ?></td>
+                    <td><?= $user_data['telepon'] ?></td>
+                    <td><a href="edit_member.php?id=<?= $user_data['id'] ?>" class="btn btn-success">Ubah</a> | <a href="delete_member.php?id=<?= $user_data['id'] ?>" onclick="return confirm('Apakah anda yakin menghapus member ini?')" class="btn btn-danger">Hapus</a></td>
 
                 </tr>
             <?php

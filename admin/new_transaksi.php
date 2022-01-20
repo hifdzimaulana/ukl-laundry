@@ -14,15 +14,16 @@ if ($_SESSION['role'] == 'kasir' or $_SESSION['login_status'] == false) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Laundry | Order Form</title>
+  <title>Laundry | Transaksi</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
 </head>
 
 <body>
+  <?php include "../components/navbar.php" ?>
 
-  <div style="max-width: 560px; margin: 5rem auto;">
-    <h3>Order form</h3>
-    <form action="proses_order_form.php" method="post">
+  <div style="max-width: 560px; margin: 3rem auto; background-color: #eeeeee; padding: 20px;">
+    <h3>Transaksi baru</h3>
+    <form action="proses_transaksi.php" method="post">
 
       <label for="member" class="form-label">Member</label>
       <select name="member" id="member" class="form-control">
@@ -59,8 +60,12 @@ if ($_SESSION['role'] == 'kasir' or $_SESSION['login_status'] == false) {
 
       <div class="div-total-bayar mt-4">
         <h3>Total bayar</h3>
-        <input type="text" readonly class="form-control-plaintext" name="bayar" id="bayar" value="-" style="font-size: 1.5rem;">
-        <!-- <h2 id="harga">-</h2> -->
+        <div class="form-group row">
+          <label for="bayar" class="col-sm-1 col-form-label" style="font-size: 1.5rem;">Rp</label>
+          <div class="col-sm-10">
+            <input type="text" readonly class="form-control-plaintext" name="bayar" id="bayar" value="" style="font-size: 1.5rem;">
+          </div>
+        </div>
       </div>
 
       <center><button type="submit" class="btn btn-success">Submit</button></center>
@@ -70,10 +75,6 @@ if ($_SESSION['role'] == 'kasir' or $_SESSION['login_status'] == false) {
 
   <script>
     // Calculating the bill
-    var formatter = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "IDR",
-    });
     var bayar = document.getElementById("bayar");
     var jenis = document.getElementById("jenis");
     var berat = document.getElementById("berat");
@@ -81,16 +82,16 @@ if ($_SESSION['role'] == 'kasir' or $_SESSION['login_status'] == false) {
     function setBayarValue(ev) {
       switch (jenis.value) {
         case "kiloan":
-          bayar.value = formatter.format(2300 * berat.value);
+          bayar.value = 2300 * berat.value;
           break;
         case "selimut":
-          bayar.value = formatter.format(3100 * berat.value);
+          bayar.value = 3100 * berat.value;
           break;
         case "karpet":
-          bayar.value = formatter.format(3700 * berat.value);
+          bayar.value = 3700 * berat.value;
           break;
         default:
-          bayar.value = "-";
+          bayar.value = "";
           break;
       }
     }
@@ -98,6 +99,7 @@ if ($_SESSION['role'] == 'kasir' or $_SESSION['login_status'] == false) {
     berat.addEventListener("input", setBayarValue);
     jenis.addEventListener("input", setBayarValue);
   </script>
+  <script src="../components/navbar.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
 

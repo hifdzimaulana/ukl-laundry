@@ -37,6 +37,15 @@
         </ul>
       </li>
       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Outlet</a>
+        <ul class="dropdown-menu pull-right" style="right: 0; left: auto;">
+          <li>
+            <a href="list_outlet.php" class="dropdown-item">List</a>
+            <a href="new_outlet.php" class="dropdown-item">Tambah</a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><?= $_SESSION['username'] ?></a>
         <ul class="dropdown-menu pull-right" style="right: 0; left: auto;">
           <li><a class="dropdown-item" href="#">Action</a></li>

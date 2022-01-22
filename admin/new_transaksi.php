@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['role'] == 'kasir' or $_SESSION['login_status'] == false) {
+if ($_SESSION['role'] == 'owner' or $_SESSION['login_status'] == false) {
   header('location: ../admin/home.php');
 } else {
   include '../koneksi.php';

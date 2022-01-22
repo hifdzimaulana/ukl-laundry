@@ -1,7 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['login_status'] == false) {
-    header('location: login.php');
+if ($_SESSION['login_status'] == false or $_SESSION['role'] == 'owner') {
+    header('location: home.php');
 }
 ?>
 
@@ -32,6 +32,7 @@ if ($_SESSION['login_status'] == false) {
                 <th>Status bayar</th>
                 <th>Total bayar</th>
                 <th>Operator</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -53,6 +54,7 @@ if ($_SESSION['login_status'] == false) {
                     <td class="text-uppercase"><?= $trx_data['status_bayar'] ?></td>
                     <td><?= $trx_data['harga'] ?></td>
                     <td><?= $trx_data['operator'] ?></td>
+                    <td><a href="edit_transaksi.php?trx_id=<?= $trx_data['id'] ?>" class="btn btn-warning">Update</a></td>
                 </tr>
             <?php
             }

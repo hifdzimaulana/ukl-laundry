@@ -62,7 +62,7 @@ function report_table($mysqli_result, $converters = null)
             <div class="col">
                 <h1>Laporan King Wash</h1>
                 <?php
-                $query_transaksi = mysqli_query($conn, "SELECT t.id, m.nama as nama_member, t.tanggal_transaksi, t.tanggal_bayar, t.status, t.status_bayar, u.nama as operator, p.jenis, p.harga * d_t.qty as berat FROM transaksi t, detail_transaksi d_t, paket p, member m, user u WHERE t.id_member = m.id AND t.id_user = u.id AND t.id = d_t.id_transaksi AND p.id = d_t.id_paket");
+                $query_transaksi = mysqli_query($conn, "SELECT t.id, m.nama as nama_member, t.tanggal_transaksi, t.status, t.status_bayar, u.nama as operator, p.jenis, p.harga * d_t.qty as harga FROM transaksi t, detail_transaksi d_t, paket p, member m, user u WHERE t.id_member = m.id AND t.id_user = u.id AND t.id = d_t.id_transaksi AND p.id = d_t.id_paket");
                 $query_member = mysqli_query($conn, "SELECT * FROM `member`");
                 $query_outlet = mysqli_query($conn, "SELECT * FROM `outlet`");
                 $query_paket = mysqli_query($conn, "SELECT * FROM `paket`");

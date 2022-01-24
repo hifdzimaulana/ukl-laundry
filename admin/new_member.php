@@ -2,8 +2,22 @@
 session_start();
 if ($_SESSION['role'] == 'owner' or $_SESSION['login_status'] == false) {
     header('location: ../admin/home.php');
-} else {
-    include '../koneksi.php';
+}
+require_once '../koneksi.php';
+
+if ($_POST) {
+    $nama = $_POST['nama'];
+    $alamat = $_POST['alamat'];
+    $jk = $_POST['jenis-kelamin'];
+    $telepon = $_POST['telepon'];
+
+    $query = sprintf("INSERT INTO member (nama, alamat, jenis_kelamin, telepon) VALUES ('%s', '%s', '%s', '%s')", $nama, $alamat, $jk, $telepon);
+
+    if (mysqli_query($conn, $query)) {
+        header('location: list_member.php');
+    } else {
+        echo sprintf("<script>alert('%s'); location.href='new_member.php';</script>", mysqli_error($conn));
+    }
 }
 ?>
 
@@ -21,7 +35,7 @@ if ($_SESSION['role'] == 'owner' or $_SESSION['login_status'] == false) {
 <body>
     <?php include "../components/navbar.php" ?>
     <div style="max-width: 780px; background-color: #EEEEEE; padding: 30px; margin: auto;">
-        <form action="proses_new_member.php" method="post">
+        <form action="new_member.php" method="post">
             <h1>Create member</h1>
             <div class="row" style="margin-top: 15px;">
                 <div class="col">

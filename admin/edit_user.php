@@ -1,12 +1,39 @@
 <?php
 session_start();
-if ($_SESSION['login_status'] == false) {
+if ($_SESSION['login_status'] == false or $_SESSION['role'] != 'admin') {
     header('location: login.php');
 }
 
-include "../koneksi.php";
-$qry_get_user = mysqli_query($conn, "select * from user where id = " . $_GET['id']);
-$user_data = mysqli_fetch_array($qry_get_user);
+require_once "../koneksi.php";
+
+if ($_POST) {
+    $id = $_GET['id'];
+    $nama = $_POST['nama'];
+    $username = $_POST['username'];
+    $password = md5($_POST['password']);
+    $role = $_POST['role'];
+
+    $username_qry = mysqli_query($conn, sprintf("SELECT * FROM user WHERE username='%s'", $username));
+    if (mysqli_num_rows($username_qry) != 0) {
+        echo sprintf("<script>alert('Username sudah digunakan!'); location.href='edit_user.php?id=%s';", $id);
+    }
+
+    $query = null;
+
+    if (empty($nama) or empty($username) or empty($password) or empty($role)) {
+        $query = sprintf("UPDATE user SET nama='%s', username='%s' WHERE id=%s", $nama, $username, $id);
+    } else {
+        $query = sprintf("UPDATE user SET nama='%s', username='%s', password='%s', role='%s' WHERE id=%s", $nama, $username, $password, $role, $id);
+    }
+
+    $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
+
+    if ($result) {
+        header('location: list_user.php');
+    } else {
+        echo sprintf("<script>alert('Error: %s'); location.href='edit_user.php?id=%s';</script>", mysqli_error($conn), $id);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,10 +49,16 @@ $user_data = mysqli_fetch_array($qry_get_user);
 
 <body>
 
+    <?php require_once('../components/navbar.php') ?>
+
+    <?php
+    $qry_get_user = mysqli_query($conn, "select * from user where id = " . $_GET['id']);
+    $user_data = mysqli_fetch_array($qry_get_user);
+    ?>
+
     <div style="max-width: 780px; background-color: #EEEEEE; padding: 30px; margin: auto;">
         <h3>Edit user</h3>
-        <form action="proses_edit_user.php" method="post">
-            <input type="hidden" name="id" id="id" value="<?= $user_data['id'] ?>">
+        <form action="edit_user.php?id=<?= $_GET['id'] ?>" method="post">
 
             <label for="nama">Nama</label>
             <input type="text" name="nama" id="nama" value="<?= $user_data['nama'] ?>" class="form-control">

@@ -21,7 +21,7 @@ if ($_SESSION['role'] == 'owner' or $_SESSION['login_status'] == false) {
 <body>
     <?php include "../components/navbar.php" ?>
 
-    <h3>List user</h3>
+    <h3>List member</h3>
     <table class="table table-hover table-striped">
         <thead>
             <tr>

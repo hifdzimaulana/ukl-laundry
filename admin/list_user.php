@@ -1,6 +1,6 @@
 <?php
 session_start();
-if ($_SESSION['role'] == 'owner' or $_SESSION['login_status'] == false) {
+if ($_SESSION['role'] != 'admin' or $_SESSION['login_status'] == false) {
     header('location: home.php');
 }
 ?>
